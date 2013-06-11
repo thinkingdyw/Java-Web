@@ -1,4 +1,4 @@
-package com.company.common.utils.web;
+package com.company.common.utils;
 
 public final class StringUtils {
 
