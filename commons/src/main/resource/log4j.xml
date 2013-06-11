@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- output console -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<!-- output format -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p %c:%L--> %m" />
+		</layout>
+	</appender>
+
+	<!-- output log file ;daliy generate-->
+	<appender name="file" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="daliy.log" />
+		<!--日志过滤门槛，记录warn以上级别日志  -->
+		<param name="Threshold" value="WARN" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c:%L --> %m" />
+		</layout>
+	</appender>
+	
+	<!-- limit size ;output to file ,split by file size -->
+	<appender name="filelog_appender" class="org.apache.log4j.RollingFileAppender">
+		<!-- name of log file -->
+		<param name="File" value="limit-size.log" />
+		<!-- append to tail of log file-->
+		<param name="Append" value="true" />
+		<!-- log size -->
+		<param name="MaxFileSize" value="1MB" />
+		<!-- copy of file -->
+		<param name="MaxBackupIndex" value="1" />
+		<!-- output format -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%%d{yyyy-MM-dd HH:mm:ss} %-5p %c:%L --> %m" />
+		</layout>
+	</appender>
+	
+</log4j:configuration>  

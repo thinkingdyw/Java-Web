@@ -1,0 +1,20 @@
+
+<html>
+	<head>
+		<title>Home</title>
+	</head>
+	<body>
+		<form action="#springUrl('')/index/"><br/>
+			name:<input name="name" value="$!p.name"/><br/>
+			age:<input name="age" value="$!p.age"/><br/>
+			sex:<input name="sex" value="$!p.sex"/><br/>
+			birthDate:<input name="birthDate" value="$!date.format('yyyy-MM-dd',$!p.birthDate)"/>
+			<br/>
+			hobbis:
+				<input name="hobbies" type="checkbox" value="1">篮球</input>
+				<input name="hobbies" type="checkbox" value="2">足球</input>
+				<input name="hobbies" type="checkbox" value="3">排球</input>
+			<input type="submit" />
+		</form>
+	</body>
+</html>
