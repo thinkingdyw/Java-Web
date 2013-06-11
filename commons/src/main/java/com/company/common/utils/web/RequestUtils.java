@@ -61,10 +61,10 @@ public final class RequestUtils {
 	private static void initDefaultConvertor(){ 
 		ConvertUtils.register(new DateConvertor(), Date.class);
 		ConvertUtils.register(new LongConverter(null), Long.class);  
-	    ConvertUtils.register(new ShortConverter(null), Short.class);  
-	    ConvertUtils.register(new IntegerConverter(null), Integer.class);  
-	    ConvertUtils.register(new DoubleConverter(null), Double.class);  
-	    ConvertUtils.register(new BigDecimalConverter(null), BigDecimal.class); 
+	    	ConvertUtils.register(new ShortConverter(null), Short.class);  
+	    	ConvertUtils.register(new IntegerConverter(null), Integer.class);  
+	    	ConvertUtils.register(new DoubleConverter(null), Double.class);  
+	    	ConvertUtils.register(new BigDecimalConverter(null), BigDecimal.class); 
 	}
 	/**
 	 * 初始化转换器
