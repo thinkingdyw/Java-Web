@@ -56,7 +56,7 @@ public final class RequestUtils {
 		return obj;
 	}
 	/**
-	 * 自定义默认类型转换器
+	 * 自定义默认类型转换器,如果类型为引用类型，若果转换失败，则设置默认值为null
 	 */
 	private static void initDefaultConvertor(){ 
 		ConvertUtils.register(new DateConvertor(), Date.class);
