@@ -1,13 +1,32 @@
 #set($title="from index page")
-<form action="#springUrl('')/index/"  method="get"><br/>
-	name:<input name="name" value="$!p.name"/><br/>
-	age:<input name="age" value="$!p.age"/><br/>
-	sex:<input name="sex" value="$!p.sex"/><br/>
-	birthDate:<input name="birthDate" value="$!date.format('yyyy-MM-dd',$!p.birthDate)"/>
+<form action="#springUrl('')/index/bean1"  method="get"><br/>
+	id:<input name="id" value="$!bean.id"/><br/>
+	name:<input name="name" value="$!bean.name"/><br/>
+	wife:
+		<input type="radio" name="b.name" value="lili"/>lili
+		<input type="radio" name="b.name" value="merry"/>merry<br/>
+	birthDate:<input name="createTime" value="$!date.format('yyyy-MM-dd',$!bean.createTime)"/>
 	<br/>
 	hobbis:
 		<input name="hobbies" type="checkbox" value="1">篮球</input>
 		<input name="hobbies" type="checkbox" value="2">足球</input>
 		<input name="hobbies" type="checkbox" value="3">排球</input>
 	<input type="submit" />
+	$date.format('yyyy-MM-dd','2012-12-12 12:12:12')
+</form>
+<hr/>
+<form action="#springUrl('')/index/bean2"  method="get"><br/>
+	id:<input name="id" value="$!bean.id"/><br/>
+	name:<input name="name" value="$!bean.name"/><br/>
+	wife:
+		<input type="radio" name="b.name" value="lili"/>lili
+		<input type="radio" name="b.name" value="merry"/>merry<br/>
+	birthDate:<input name="createTime" value="$!date.format('yyyy-MM-dd',$!bean.createTime)"/>
+	<br/>
+	hobbis:
+		<input name="hobbies" type="checkbox" value="1">篮球</input>
+		<input name="hobbies" type="checkbox" value="2">足球</input>
+		<input name="hobbies" type="checkbox" value="3">排球</input>
+	<input type="submit" />
+	$date.format('yyyy-MM-dd','2012-12-12 12:12:12')
 </form>

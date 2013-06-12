@@ -41,7 +41,7 @@
 		<property name="exposeRequestAttributes" value="${velocity.exposeable.request.attributes}" />
 		<property name="exposeSessionAttributes" value="${velocity.exposeable.session.attributes}" />
 		<property name="toolboxConfigLocation" value="${velocity.toolbox}" />
-		<property name="order" value="3" />
+		<property name="order" value="2" />
 		<property name="attributes">
 			<props>
 				<prop key="ver">0.0.1</prop>
@@ -61,7 +61,7 @@
 		<property name="layoutUrl" value="${velocity.layout.url}" />
 		<property name="layoutKey" value="${velocity.layout.key}" />
 		<property name="screenContentKey" value="${velocity.layout.screen.content.key}" />
-		<property name="order" value="2" />
+		<property name="order" value="1" />
 		<property name="attributes">
 			<props>
 				<prop key="ver">0.0.1</prop>
@@ -90,8 +90,7 @@
 		<property name="defaultViews">
 			<list>
 				<!-- for application/json -->
-				<bean
-					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"></bean>
+				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"></bean>
 			</list>
 		</property>
 	</bean>

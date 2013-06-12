@@ -6,29 +6,58 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.company.common.utils.web.CookieUtils;
 import com.company.common.utils.web.RequestUtils;
-import com.company.web.User;
-
+import com.company.web.domain.EntityA;
+/**
+ * 
+ *@author thinkingdyw
+ *----------------------------------
+ * 2013-6-12 
+ * email:thinkingdyw@gmail.com
+ */
 @Controller
-@RequestMapping("/index/")
+@RequestMapping("/index")
 public class HomeController {
 
 	private static Logger LOG = Logger.getLogger(HomeController.class);
 
-	@RequestMapping("/")
-	public ModelAndView index(HttpServletRequest request,
+	@RequestMapping("/bean1")
+	public ModelAndView toBean(HttpServletRequest request,
 			HttpServletResponse response) {
 		ModelAndView view = new ModelAndView("views/index");
 		try {
-			User user = RequestUtils.toBean(User.class, request);
-			//CookieUtils.add("name", "diaoyouwei--", response);
-			CookieUtils.add("name", "diaoyouwei", response);
-			System.out.println(CookieUtils.get("name", request).getValue());
-			view.addObject("p", user);
+			EntityA bean = RequestUtils.toBean(EntityA.class, request);
+			CookieUtils.delete("name", request,response);
+			LOG.info("user name:"+bean.getName());
+			view.addObject("bean", bean);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.warn("异常", e);
+		}
+		return view;
+	}
+	@RequestMapping("/bean2")
+	public ModelAndView toBeanWithSubChild(HttpServletRequest request,
+			HttpServletResponse response) {
+		ModelAndView view = new ModelAndView("views/index");
+		try {
+			EntityA bean = RequestUtils.toBean(EntityA.class, request);
+			CookieUtils.delete("name", request,response);
+			LOG.info("entity B name:"+bean.getB().getName());
+			view.addObject("bean", bean);
+		} catch (Exception e) {
+			LOG.warn("异常", e);
+		}
+		return view;
+	}
+	@RequestMapping("/cookie")
+	public ModelAndView cookie(HttpServletRequest request,
+			HttpServletResponse response) {
+		ModelAndView view = new ModelAndView("views/index");
+		try {
+			CookieUtils.add("name", "thinkingdyw",response);
+			LOG.info("cookie:"+CookieUtils.get("name", request).getValue());
+		} catch (Exception e) {
 			LOG.warn("异常", e);
 		}
 		return view;
