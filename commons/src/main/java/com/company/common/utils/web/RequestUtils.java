@@ -1,11 +1,10 @@
 package com.company.common.utils.web;
 
+import java.lang.reflect.Constructor;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
@@ -38,6 +37,7 @@ public final class RequestUtils {
 			String datePattern) throws Exception {
 		T obj = instantiate(clazz);
 		initDefaultConvertor();
+		ConvertUtils.register(new DateConvertor(datePattern), Date.class);
 		BeanUtils.populate(obj, request.getParameterMap());
 		return obj;
 	}
@@ -62,6 +62,7 @@ public final class RequestUtils {
 			String datePattern) throws Exception {
 		T obj = instantiate(clazz);
 		initDefaultConvertor();
+		ConvertUtils.register(new DateConvertor(datePattern), Date.class);
 		BeanUtils.populate(obj, params);
 		return obj;
 	}
@@ -85,10 +86,12 @@ public final class RequestUtils {
 	 */
 	private static void initConvertor(Map<Class<?>, Converter> convertors) {
 		initDefaultConvertor();
-		for (Map.Entry<Class<?>, Converter> convertor : convertors.entrySet()) {
-			ConvertUtils.register(convertor.getValue(), convertor.getKey());
+		if (null != convertors && convertors.size() > 0) {
+			for (Map.Entry<Class<?>, Converter> convertor : convertors
+					.entrySet()) {
+				ConvertUtils.register(convertor.getValue(), convertor.getKey());
+			}
 		}
-
 	}
 
 	public static <T> T instantiate(Class<T> clazz) throws Exception {
@@ -99,6 +102,23 @@ public final class RequestUtils {
 			return clazz.newInstance();
 		} catch (Exception ex) {
 			throw new Exception("Is it an abstract class?", ex);
+		}
+	}
+
+	public static <T> T instantiateClass(Class<T> clazz) throws Exception {
+		if (clazz.isInterface()) {
+			throw new Exception("Specified class is an interface");
+		}
+		return instantiateClass(clazz.getDeclaredConstructor());
+	}
+
+	public static <T> T instantiateClass(Constructor<T> ctor, Object... args)
+			throws Exception {
+		try {
+			ctor.setAccessible(true);
+			return ctor.newInstance(args);
+		} catch (Exception ex) {
+			throw new Exception("Is it an abstract class?");
 		}
 	}
 }

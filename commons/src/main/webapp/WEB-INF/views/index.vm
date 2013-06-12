@@ -1,10 +1,9 @@
-
 <html>
 	<head>
 		<title>Home</title>
 	</head>
 	<body>
-		<form action="#springUrl('')/index/"><br/>
+		<form action="#springUrl('')/index/"  method="get"><br/>
 			name:<input name="name" value="$!p.name"/><br/>
 			age:<input name="age" value="$!p.age"/><br/>
 			sex:<input name="sex" value="$!p.sex"/><br/>

@@ -16,13 +16,13 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-public class CharacterEncodingFilter implements Filter{
+public class CharacterEncodingFilter implements Filter {
 
 	/**
 	 * default character set
 	 */
 	private String encoding = "utf-8";
-	
+
 	@Override
 	public void destroy() {
 	}
@@ -31,36 +31,41 @@ public class CharacterEncodingFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		request.setCharacterEncoding(encoding);
-		chain.doFilter(new CommonHttpServletRequest((HttpServletRequest) request, encoding), response);
-		response.setCharacterEncoding(encoding);
+		chain.doFilter(new CommonHttpServletRequest(
+				(HttpServletRequest) request, encoding), response);
+		response.setCharacterEncoding("text/html;charset=" + encoding);
 	}
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		final String charset = filterConfig.getInitParameter("encoding");
-		if(charset != null){
+		if (charset != null) {
 			encoding = charset;
 		}
 	}
-	
-	private class CommonHttpServletRequest extends HttpServletRequestWrapper{
+
+	private class CommonHttpServletRequest extends HttpServletRequestWrapper {
 
 		private String encoding = "utf-8";
-		@SuppressWarnings("unused")
+		private final String GET = "get";
 		private HttpServletRequest request;
-		public CommonHttpServletRequest(HttpServletRequest request,String encoding) {
+
+		public CommonHttpServletRequest(HttpServletRequest request,
+				String encoding) {
 			super(request);
 			this.request = request;
 			this.encoding = encoding;
 		}
+
 		@Override
 		public String getParameter(String name) {
-			if(isEmpty(name)){
+			if (isEmpty(name)) {
 				return null;
-			}else{
-				return encode(super.getParameter(name));
+			} else {
+				return getEncodedValue(super.getParameter(name));
 			}
 		}
+
 		@SuppressWarnings("unchecked")
 		@Override
 		public Map getParameterMap() {
@@ -71,72 +76,86 @@ public class CharacterEncodingFilter implements Filter{
 				return super.getParameterMap();
 			}
 		}
+
 		@Override
 		public String[] getParameterValues(String name) {
 			String[] newValues = getEncodedValue(super.getParameterValues(name));
 			return newValues;
 		}
-		
-		private String encode(String value){
+
+		private String encode(String value) {
 			try {
-				if(isEmpty(value)){
+				if (isEmpty(value)) {
 					return null;
 				}
-				return new String(value.getBytes("ISO-8859-1"),encoding);
+				return new String(value.getBytes("ISO-8859-1"), encoding);
 			} catch (UnsupportedEncodingException e) {
 				return value;
 			}
 		}
+
 		private boolean isEmpty(String name) {
-			if(null == name || name.length()==0 || name.trim().equals("")){
+			if (null == name || name.length() == 0 || name.trim().equals("")) {
 				return true;
-			}else{
+			} else {
 				return false;
 			}
-				
+
 		}
+
 		private boolean isEmpty(Object[] array) {
-			if(null == array || array.length == 0){
+			if (null == array || array.length == 0) {
 				return true;
-			}else{
+			} else {
 				return false;
 			}
-				
+
 		}
-		
-		private String getEncodedValue(String value){
-			return encode(value);
+
+		private String getEncodedValue(String value) {
+			if (!isEmpty(value)) {
+				String newValue = null;
+				if (GET.equalsIgnoreCase(request.getMethod())) {
+					newValue = encode(value);
+				} else {
+					newValue = value;
+				}
+				return newValue;
+			} else {
+				return null;
+			}
 		}
-		
-		private String[] getEncodedValue(String[] values){
+
+		private String[] getEncodedValue(String[] values) {
 			List<String> list = new ArrayList<String>();
-			if(!isEmpty(values)){
+			if (!isEmpty(values)) {
 				for (String value : values) {
 					String newValue = getEncodedValue(value);
-					if(null != newValue){
+					if (null != newValue) {
 						list.add(newValue);
 					}
 				}
-			}else{
+			} else {
 				return null;
 			}
 			return list.toArray(new String[0]);
 		}
+
 		@SuppressWarnings("unchecked")
-		private Map<String,Object> paramsOfRequest() throws Exception{
+		private Map<String, Object> paramsOfRequest() throws Exception {
 			Map<String, Object> params = new HashMap<String, Object>();
-			Map<String, Object> orignalParams = super.getParameterMap(); 
+			Map<String, Object> orignalParams = super.getParameterMap();
 			for (Map.Entry<String, Object> entry : orignalParams.entrySet()) {
 				final String name = entry.getKey();
 				final Object value = entry.getValue();
-				if(value.getClass() == String.class){
+				if (value.getClass() == String.class) {
 					String newValue = this.getParameter(name);
-					if(newValue != null){
+					if (newValue != null) {
 						params.put(name, newValue);
 					}
-				}else if(value.getClass() == String[].class){
+				} else if (value.getClass() == String[].class) {
 					String[] newValue = this.getParameterValues(name);
-					if(newValue != null && newValue.length > 0){
+					if (newValue != null && newValue.length > 0) {
 						params.put(name, newValue);
 					}
 				}

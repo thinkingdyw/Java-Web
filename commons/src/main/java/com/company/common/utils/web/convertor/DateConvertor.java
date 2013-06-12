@@ -19,6 +19,7 @@ public class DateConvertor implements Converter {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Override
 	public Object convert(Class type, Object value) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(
 				null == pattern ? DEFAULT_DATE_FORMAT : pattern);
