@@ -1,49 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	<!-- Scans within the base package of the application for @Components to configure as beans -->
+	<!--
+		DispatcherServlet Context: defines this servlet's request-processing
+		infrastructure
+	-->
+	<!--
+		Scans within the base package of the application for @Components to
+		configure as beans
+	-->
 	<!-- @Controller, @Service, @Configuration, etc. -->
 	<context:component-scan base-package="com.company.web" />
 
-	<context:property-placeholder location="classpath:spring/velocity-config.properties"/>
+	<context:property-placeholder
+		location="classpath:spring/velocity-config.properties" />
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
-	<mvc:default-servlet-handler/>
+	<mvc:default-servlet-handler />
 
 	<!-- integration Velocity -->
-	
+
 	<!-- velocity config -->
 	<bean id="velocityConfig"
-		  class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-		  <property name="resourceLoaderPath" value="${view.root.path}" />
-		  <property name="configLocation" value="${velocity.config.file}" />
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="${velocity.resource.load.path}" />
+		<property name="configLocation" value="${velocity.config.file}" />
 	</bean>
-	
 	<!-- velocity view resover-->
 	<bean id="velocityViewResolver"
-		  class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
-		<property name="cache" value="${cacheable}" />
-		<property name="suffix" value="${view.suffix}" />
-		<property name="contentType" value="${content.type}" />
-		<property name="exposeRequestAttributes" value="${exposeRequestAttributes}"/>
-		<property name="exposeSessionAttributes" value="${exposeSessionAttributes}"/>
-		<property name="toolboxConfigLocation" value="${toolboxConfigLocation}"/>
-		<!-- custom properties ;used in view-->
+		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="cache" value="${velocity.cache}" />
+		<property name="suffix" value="${velocity.view.suffix}" />
+		<property name="contentType" value="${velocity.content.type}" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="exposeRequestAttributes" value="${velocity.exposeable.request.attributes}" />
+		<property name="exposeSessionAttributes" value="${velocity.exposeable.session.attributes}" />
+		<property name="toolboxConfigLocation" value="${velocity.toolbox}" />
+		<property name="order" value="3" />
 		<property name="attributes">
 			<props>
 				<prop key="ver">0.0.1</prop>
 			</props>
 		</property>
 	</bean>
-	
-	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+	<!-- velocity layout view resover-->
+	<bean id="velocityLayoutViewResolver"
+		class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+		<property name="cache" value="${velocity.cache}" />
+		<property name="suffix" value="${velocity.view.suffix}" />
+		<property name="contentType" value="${velocity.content.type}" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="exposeRequestAttributes" value="${velocity.exposeable.request.attributes}" />
+		<property name="exposeSessionAttributes" value="${velocity.exposeable.session.attributes}" />
+		<property name="toolboxConfigLocation" value="${velocity.toolbox}" />
+		<property name="layoutUrl" value="${velocity.layout.url}" />
+		<property name="layoutKey" value="${velocity.layout.key}" />
+		<property name="screenContentKey" value="${velocity.layout.screen.content.key}" />
+		<property name="order" value="2" />
+		<property name="attributes">
+			<props>
+				<prop key="ver">0.0.1</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="defaultContentType" value="text/html;charset=utf-8" />
 		<property name="ignoreAcceptHeader" value="true" />
 		<!-- xml and json configuration -->
@@ -53,16 +80,19 @@
 				<entry key="json" value="application/json"></entry>
 			</map>
 		</property>
-		
+
 		<property name="viewResolvers">
 			<list>
-				<ref bean="velocityViewResolver"/>
+				<ref bean="velocityViewResolver" />
+				<ref bean="velocityLayoutViewResolver" />
 			</list>
 		</property>
-		
 		<property name="defaultViews">
-			<!-- for application/json -->
-			<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"></bean>
+			<list>
+				<!-- for application/json -->
+				<bean
+					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"></bean>
+			</list>
 		</property>
 	</bean>
 </beans>

@@ -20,7 +20,7 @@ public class HomeController {
 	@RequestMapping("/")
 	public ModelAndView index(HttpServletRequest request,
 			HttpServletResponse response) {
-		ModelAndView view = new ModelAndView("index");
+		ModelAndView view = new ModelAndView("views/index");
 		try {
 			User user = RequestUtils.toBean(User.class, request);
 			//CookieUtils.add("name", "diaoyouwei--", response);
