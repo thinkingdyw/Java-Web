@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
@@ -14,7 +15,7 @@
 		Scans within the base package of the application for @Components to
 		configure as beans
 	-->
-	<!-- @Controller, @Service, @Configuration, etc. -->
+	<!-- @Controller, and other @Component, etc. -->
 	<context:component-scan base-package="com.company.web" />
 
 	<context:property-placeholder
@@ -41,7 +42,7 @@
 		<property name="exposeRequestAttributes" value="${velocity.exposeable.request.attributes}" />
 		<property name="exposeSessionAttributes" value="${velocity.exposeable.session.attributes}" />
 		<property name="toolboxConfigLocation" value="${velocity.toolbox}" />
-		<property name="order" value="2" />
+		<property name="order" value="3" />
 		<property name="attributes">
 			<props>
 				<prop key="ver">0.0.1</prop>
@@ -61,7 +62,7 @@
 		<property name="layoutUrl" value="${velocity.layout.url}" />
 		<property name="layoutKey" value="${velocity.layout.key}" />
 		<property name="screenContentKey" value="${velocity.layout.screen.content.key}" />
-		<property name="order" value="1" />
+		<property name="order" value="2" />
 		<property name="attributes">
 			<props>
 				<prop key="ver">0.0.1</prop>
@@ -71,6 +72,7 @@
 
 	<bean
 		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="order" value="1" />
 		<property name="defaultContentType" value="text/html;charset=utf-8" />
 		<property name="ignoreAcceptHeader" value="true" />
 		<!-- xml and json configuration -->
@@ -90,7 +92,8 @@
 		<property name="defaultViews">
 			<list>
 				<!-- for application/json -->
-				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"></bean>
+				<bean
+					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"></bean>
 			</list>
 		</property>
 	</bean>
