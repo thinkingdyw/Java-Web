@@ -1,6 +1,10 @@
 package com.company.web.domain;
 
 import java.util.Date;
+
+import com.company.common.utils.validation.Validateable;
+import com.company.common.utils.validation.constraints.Length;
+import com.company.common.utils.validation.constraints.NotNull;
 /**
  * 
  *@author thinkingdyw
@@ -8,13 +12,15 @@ import java.util.Date;
  * 2013-6-12 
  * email:thinkingdyw@gmail.com
  */
-public class EntityA {
+public class EntityA implements Validateable{
 	
 	private Long id;
 	private String name;
 	private Date createTime;
 	private Integer[] hobbies;
 	private EntityB b = new EntityB();
+	@NotNull(name="用户名")
+	@Length(max=10,name="用户名")
 	public String getName() {
 		return name;
 	}
@@ -33,6 +39,7 @@ public class EntityA {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	@NotNull(name="生成日期")
 	public Date getCreateTime() {
 		return createTime;
 	}

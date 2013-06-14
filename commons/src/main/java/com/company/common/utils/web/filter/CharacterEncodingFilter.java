@@ -95,7 +95,7 @@ public class CharacterEncodingFilter implements Filter {
 		}
 
 		private boolean isEmpty(String name) {
-			if (null == name || name.length() == 0 || name.trim().equals("")) {
+			if (null == name || name.length() == 0) {
 				return true;
 			} else {
 				return false;
