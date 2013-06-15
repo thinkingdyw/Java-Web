@@ -10,15 +10,15 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 
-	<context:component-scan
-		base-package="基于注解的，需要spring管理的bean的基包，多个用逗号分隔 "/>
+	<context:component-scan base-package="基于注解的，需要spring管理的bean的基包，多个用逗号分隔 "/>
 	<aop:aspectj-autoproxy expose-proxy="true"/>
 
 	<context:annotation-config/>
 
 	<!-- config db property file location -->
-  <context:property-placeholder
-  	location="classpath:spring/data-source.properties" system-properties-mode="FALLBACK"/>
+  	<context:property-placeholder
+  		location="classpath:spring/data-source.properties" system-properties-mode="FALLBACK"/>
+  		
 	<bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName">
 			<value>${driverClassName}</value>
