@@ -14,5 +14,4 @@
                 <goal>tomcat:run</goal>
             </goals>
         </action>
-        
-    </actions>
+</actions>
