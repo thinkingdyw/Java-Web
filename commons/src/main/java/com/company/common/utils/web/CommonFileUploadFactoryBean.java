@@ -1,3 +1,20 @@
+package com.company.common.utils.web;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.IOUtils;
+
 public final class CommonFileUploadFactoryBean {
 	private String targetPath;//文件存放位置
 	private long limitSize;//上传文件大小限制
