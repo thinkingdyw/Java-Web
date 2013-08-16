@@ -1,9 +1,9 @@
-package com.jd.bse.utils;
+package com.company.common.utils.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.ProgressListener;
-import com.jd.bse.utils.CommonFileUploadFactoryBean.UploadingFile;
+import com.company.common.utils.web.CommonFileUploadFactoryBean.UploadingFile;
 
 public class CommonFileUploadListener implements ProgressListener{
 
