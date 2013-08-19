@@ -37,7 +37,7 @@ public final class CookieUtils {
 
 	public static void add(Cookie cookie, HttpServletResponse response) {
 		if (cookie == null) {
-			return;
+			throw new RuntimeException("Cookie不可为空!");
 		}
 		response.addCookie(cookie);
 	}
@@ -46,12 +46,15 @@ public final class CookieUtils {
 			HttpServletResponse response) {
 		Cookie cookie = get(name, request);
 		if (cookie == null) {
-			return;
+			throw new RuntimeException("Cookie不可为空!");
 		}
 		cookie.setMaxAge(0);
 		add(cookie, response);
 	}
 	public static void add(String name, String value,HttpServletResponse response) {
+		if(null == name){
+			throw new RuntimeException("Cookie 名称不可为空!");
+		}
 		Cookie cookie = new Cookie(name, value);
 		add(cookie, response);
 	}
