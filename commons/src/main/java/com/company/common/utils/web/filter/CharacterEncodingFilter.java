@@ -31,7 +31,7 @@ public class CharacterEncodingFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		request.setCharacterEncoding(encoding);
-		chain.doFilter(new CommonHttpServletRequest(
+		chain.doFilter(new EncodingHttpServletRequest(
 				(HttpServletRequest) request, encoding), response);
 		response.setCharacterEncoding("text/html;charset=" + encoding);
 	}
@@ -44,13 +44,13 @@ public class CharacterEncodingFilter implements Filter {
 		}
 	}
 
-	private class CommonHttpServletRequest extends HttpServletRequestWrapper {
+	private class EncodingHttpServletRequest extends HttpServletRequestWrapper {
 
 		private String encoding = "utf-8";
 		private final String GET = "get";
 		private HttpServletRequest request;
 
-		public CommonHttpServletRequest(HttpServletRequest request,
+		public EncodingHttpServletRequest(HttpServletRequest request,
 				String encoding) {
 			super(request);
 			this.request = request;
