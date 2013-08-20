@@ -8,7 +8,7 @@ import java.util.Properties;
 import java.util.Set;
 
 /**
- * properties文件解析器
+ * 默认properties文件解析器
  * @author diaoyouwei
  *
  */
@@ -27,7 +27,9 @@ public class PropertiesPlaceholderResolver implements PlaceholderResolver {
 		this.parse(configure);
 		return configure;
 	}
-
+	/**
+	 * 读取配置
+	 **/
 	private Map<String, String> readConfigure(Properties properties) {
 		if (null == properties) {
 			throw new IllegalArgumentException("configure file is Null!");
@@ -47,7 +49,9 @@ public class PropertiesPlaceholderResolver implements PlaceholderResolver {
 		}
 		return prop;
 	}
-
+	/**
+	 * 解析配置
+	 **/
 	private void parse(Map<String, String> config) {
 		for (Map.Entry<String, String> entry : config.entrySet()) {
 			String val = parseValue(entry.getKey(), entry.getValue(), config);
@@ -78,7 +82,9 @@ public class PropertiesPlaceholderResolver implements PlaceholderResolver {
 		}
 		return value;
 	}
-
+	/**
+	 * 判断占位符是否循环引用
+	 **/
 	private boolean isCircleReferece(StringBuilder placeholder) {
 		int count = 0;
 		while (count < 2) {
