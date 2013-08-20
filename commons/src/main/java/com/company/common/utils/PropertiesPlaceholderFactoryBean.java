@@ -9,10 +9,13 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+/**
+ * 占位符属性配置
+ **/
 public final class PropertiesPlaceholderFactoryBean {
 
-	private String configFile;
-	private Set<String> configFiles;
+	private String configFile;//配置文件，位于classpath下
+	private Set<String> configFiles;//配置文件，位于classpath下
 	
 	private Map<String, String> config = new HashMap<String, String>();
 	
@@ -23,8 +26,12 @@ public final class PropertiesPlaceholderFactoryBean {
 		loadConfigure(configFiles);
 		this.resolve();
 	}
+	/**
+	 * 解析配置文件
+	 **/
 	private void resolve() {
 		if(null == placeholderResolver){
+			//如果没有指定配置文件解析器，则使用默认的解析器
 			placeholderResolver = new PropertiesPlaceholderResolver();
 		}
 		if(this.configs.size() > 0){
@@ -34,6 +41,9 @@ public final class PropertiesPlaceholderFactoryBean {
 			}
 		}
 	}
+	/**
+	 * 加载配置文件
+	 **/
 	private void loadConfigure(Set<String> configFiles) throws Exception {
 		if(null != configFiles && configFiles.size() >0){
 			for (String config : configFiles) {
@@ -41,10 +51,16 @@ public final class PropertiesPlaceholderFactoryBean {
 			}
 		}
 	}
+	/**
+	 * 加载配置文件
+	 **/
 	public void loadConfigure(String configFile) throws Exception{
 		Properties properties = getProperties(configFile);
 		configs.add(properties);
 	}
+	/**
+	 * 根据配置信息获取properties文件实例
+	 **/
 	private Properties getProperties(String configFile) throws IOException{
 		ClassLoader classLoader = getClassLoader();
 		InputStream in= classLoader.getResourceAsStream(configFile);
@@ -56,6 +72,9 @@ public final class PropertiesPlaceholderFactoryBean {
 		in.close();
 		return properties;
 	}
+	/**
+	 * 获得类加载器
+	 **/
 	private ClassLoader getClassLoader() {
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		if(null == classLoader){
