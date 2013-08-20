@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * 占位符属性配置
  **/
-public final class PropertiesPlaceholderFactoryBean {
+public final class PropertiesPlaceholderConfigureFactoryBean {
 
 	private String configFile;//配置文件，位于classpath下
 	private Set<String> configFiles;//配置文件，位于classpath下
