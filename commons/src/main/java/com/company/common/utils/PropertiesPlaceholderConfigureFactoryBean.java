@@ -16,11 +16,10 @@ public final class PropertiesPlaceholderConfigureFactoryBean {
 
 	private String configFile;//配置文件，位于classpath下
 	private Set<String> configFiles;//配置文件，位于classpath下
-	
-	private Map<String, String> config = new HashMap<String, String>();
-	
+	private Map<String, String> config = new HashMap<String, String>();//解析后的配置信息
 	private PlaceholderResolver placeholderResolver;
 	private Set<Properties> configs = new HashSet<Properties>();
+	
 	public void parse() throws Exception{
 		loadConfigure(configFile);
 		loadConfigure(configFiles);
