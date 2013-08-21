@@ -14,11 +14,11 @@ import java.util.Set;
  **/
 public final class PropertiesPlaceholderConfigureFactoryBean {
 
-	private String configFile;//配置文件，位于classpath下
-	private Set<String> configFiles;//配置文件，位于classpath下
+	private String configFile;//单个配置文件，位于classpath下
+	private Set<String> configFiles;//多个配置文件，如果有重复，后面覆盖前面的，位于classpath下
 	private Map<String, String> config = new HashMap<String, String>();//解析后的配置信息
-	private PlaceholderResolver placeholderResolver;
-	private Set<Properties> configs = new HashSet<Properties>();
+	private PlaceholderResolver placeholderResolver;//properties解析器
+	private List<Properties> configs = new ArrayList<Properties>();
 	
 	public void parse() throws Exception{
 		loadConfigure(configFile);
@@ -30,14 +30,11 @@ public final class PropertiesPlaceholderConfigureFactoryBean {
 	 **/
 	private void resolve() {
 		if(null == placeholderResolver){
-			//如果没有指定配置文件解析器，则使用默认的解析器
 			placeholderResolver = new PropertiesPlaceholderResolver();
 		}
 		if(this.configs.size() > 0){
-			for (Properties properties : configs) {
-				Map<String, String> map = this.placeholderResolver.resolve(properties);
-				this.config.putAll(map);
-			}
+			Map<String, String> map = this.placeholderResolver.resolve(configs);
+			this.config.putAll(map);
 		}
 	}
 	/**
