@@ -9,5 +9,5 @@ public interface PlaceholderResolver {
 	 * @param config
 	 * @return
 	 */
-	public Map<String, String> resolve(Properties config);
+	public Map<String, String> resolve(List<Properties> props);
 }
