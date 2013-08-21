@@ -22,8 +22,11 @@ public class PropertiesPlaceholderResolver implements PlaceholderResolver {
 	private Properties config;
 	private Set<String> visitedPlaceholders = new HashSet<String>();// 存放已访问的占位符，用于判断是否循环调用
 
-	public Map<String, String> resolve(Properties config) {
-		Map<String, String> configure = readConfigure(config);
+	public Map<String, String> resolve(List<Properties> props) {
+		Map<String, String> configure = new HashMap<String, String>();
+		for (Properties properties : props) {
+			configure.putAll(readConfigure(properties));
+		}
 		this.parse(configure);
 		return configure;
 	}
