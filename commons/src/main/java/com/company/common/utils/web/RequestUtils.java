@@ -42,7 +42,7 @@ public final class RequestUtils {
 		try{
 			response.sendRedirect(url);	
 		}catch(IOException e){
-			
+			e.printStackTrace();
 		}
 		
 	}
