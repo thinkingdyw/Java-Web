@@ -17,6 +17,22 @@ import com.company.common.utils.web.convertor.DateConvertor;
 
 public final class RequestUtils {
 
+	private final String AJAX_REQUEST = "XMLHttpRequest";
+	private final String AJAX_REQUEST_HEAD = "x-requested-with";
+	
+	/**
+	 * 是否Ajax异步请求
+	 **/
+	private boolean isAjaxRequest(HttpServletRequest request){
+		final String ajaxRequest = request.getHeader(AJAX_REQUEST_HEAD);
+		if(null != ajaxRequest
+			&& AJAX_REQUEST.equals(ajaxRequest)){
+			
+			return true;
+			
+		}
+		return false;
+	}
 	public static <T> T toBean(Class<T> clazz, HttpServletRequest request)
 			throws Exception {
 		T obj = instantiate(clazz);
