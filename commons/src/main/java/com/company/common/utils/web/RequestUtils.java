@@ -23,7 +23,7 @@ public final class RequestUtils {
 	/**
 	 * 是否Ajax异步请求
 	 **/
-	private boolean isAjaxRequest(HttpServletRequest request){
+	private static boolean isAjaxRequest(HttpServletRequest request){
 		final String ajaxRequest = request.getHeader(AJAX_REQUEST_HEAD);
 		if(null != ajaxRequest
 			&& AJAX_REQUEST.equals(ajaxRequest)){
@@ -36,7 +36,7 @@ public final class RequestUtils {
 	/**
 	 * Ajax 方式返回相应信息
 	 **/
-	public void ajaxWrite(HttpServletResponse response,String url) throws IOException{
+	public static void asyncWrite(HttpServletResponse response,String url) throws IOException{
 		response.setContentType("text/html;charset=utf-8");
 		
 		response.sendRedirect(url);
