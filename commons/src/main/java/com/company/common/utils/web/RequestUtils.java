@@ -33,6 +33,19 @@ public final class RequestUtils {
 		}
 		return false;
 	}
+	/**
+	 * Ajax 方式返回相应信息
+	 **/
+	public void ajaxWrite(HttpServletResponse response,String url){
+		response.setContentType("text/html;charset=utf-8");
+		
+		try{
+			response.sendRedirect(url);	
+		}catch(IOException e){
+			
+		}
+		
+	}
 	public static <T> T toBean(Class<T> clazz, HttpServletRequest request)
 			throws Exception {
 		T obj = instantiate(clazz);
