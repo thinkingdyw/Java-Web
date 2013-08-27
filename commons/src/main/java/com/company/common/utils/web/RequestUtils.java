@@ -33,10 +33,10 @@ public final class RequestUtils {
 	/**
 	 * Ajax 方式返回相应信息
 	 **/
-	public static void asyncWrite(HttpServletResponse response,String url) throws IOException{
+	public static void asyncWrite(HttpServletResponse response,String content) throws IOException{
 		response.setContentType("text/html;charset=utf-8");
 		
-		response.sendRedirect(url);
+		response.getWriter().print(content);
 		
 	}
 	public static <T> T toBean(Class<T> clazz, HttpServletRequest request)
