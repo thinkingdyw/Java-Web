@@ -18,13 +18,13 @@ import com.company.common.utils.web.convertor.DateConvertor;
 public final class RequestUtils {
 
 	private final String AJAX_REQUEST = "XMLHttpRequest";
-	private final String AJAX_REQUEST_HEAD = "x-requested-with";
+	private final String AJAX_REQUEST_HEADER = "x-requested-with";
 	
 	/**
 	 * 是否Ajax异步请求
 	 **/
-	private static boolean isAjaxRequest(HttpServletRequest request){
-		final String ajaxRequest = request.getHeader(AJAX_REQUEST_HEAD);
+	private static boolean isAsyncRequest(HttpServletRequest request){
+		final String ajaxRequest = request.getHeader(AJAX_REQUEST_HEADER);
 		if(null != ajaxRequest
 			&& AJAX_REQUEST.equals(ajaxRequest)){
 			
