@@ -25,8 +25,7 @@ public final class RequestUtils {
 	 **/
 	private static boolean isAsyncRequest(HttpServletRequest request){
 		final String ajaxRequest = request.getHeader(AJAX_REQUEST_HEADER);
-		if(null != ajaxRequest
-			&& AJAX_REQUEST.equals(ajaxRequest)){
+		if(null != ajaxRequest && AJAX_REQUEST.equals(ajaxRequest)){
 			
 			return true;
 			
