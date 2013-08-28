@@ -12,7 +12,7 @@ import java.util.Set;
  * @author diaoyouwei
  *
  */
-public class PropertiesPlaceholderResolver implements PropertiesPlaceholderResolver {
+public class PropertiesPlaceholderResolver implements PlaceholderResolver {
 
 	private static final String DEFAULT_PLACEHOLDER_PREFIX = "${";// 默认占位符前缀
 	private static final String DEFAULT_PLACEHOLDER_SUFFIX = "}";// 默认占位符后缀
