@@ -17,7 +17,7 @@ public final class PropertiesPlaceholderConfigureFactoryBean {
 	private String configFile;//单个配置文件，位于classpath下
 	private Set<String> configFiles;//多个配置文件，如果有重复，后面覆盖前面的，位于classpath下
 	private Map<String, String> config = new HashMap<String, String>();//解析后的配置信息
-	private PropertiesPlaceholderResolver placeholderResolver;//properties解析器
+	private PlaceholderResolver placeholderResolver;//properties解析器
 	private List<Properties> configs = new ArrayList<Properties>();
 	
 	public void parse() throws Exception{
