@@ -24,6 +24,7 @@ public class AjaxController {
 		//通用的相应结果对象，可以应对较快的需求变更
 		Result<String> result = new Result<String>();
 		result.setStatusCode(HttpStatus._2XX_200);
+		result.setData("This is Response data!!!");
 		result.setMsg("请求成功!");
 		return result;
 	}
