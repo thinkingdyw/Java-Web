@@ -18,7 +18,7 @@ import com.company.common.utils.web.convertor.DateConvertor;
 public final class RequestUtils {
 
 	private final String AJAX_REQUEST = "XMLHttpRequest";
-	private final String AJAX_REQUEST_HEADER = "x-requested-with";
+	private final String AJAX_REQUEST_HEADER = "X-Requested-With";
 	
 	/**
 	 * 是否Ajax异步请求
