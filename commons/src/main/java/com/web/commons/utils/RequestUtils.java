@@ -1,10 +1,10 @@
 package com.web.commons.utils;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,7 +46,7 @@ public final class RequestUtils {
 	}
 	public static <T> T toBean(Class<T> clazz, HttpServletRequest request)
 			throws Exception {
-		T obj = instantiate(clazz);
+		T obj = EntityUtils.instantiate(clazz);
 		initDefaultConvertor();
 		BeanUtils.populate(obj, request.getParameterMap());
 		return obj;
@@ -54,7 +54,7 @@ public final class RequestUtils {
 
 	public static <T> T toBean(Class<T> clazz, HttpServletRequest request,
 			Map<Class<?>, Converter> convertors) throws Exception {
-		T obj = instantiate(clazz);
+		T obj = EntityUtils.instantiate(clazz);
 		initConvertor(convertors);
 		BeanUtils.populate(obj, request.getParameterMap());
 		return obj;
@@ -62,7 +62,7 @@ public final class RequestUtils {
 
 	public static <T> T toBean(Class<T> clazz, HttpServletRequest request,
 			String datePattern) throws Exception {
-		T obj = instantiate(clazz);
+		T obj = EntityUtils.instantiate(clazz);
 		initDefaultConvertor();
 		ConvertUtils.register(new DateConvertor(datePattern), Date.class);
 		BeanUtils.populate(obj, request.getParameterMap());
@@ -71,7 +71,7 @@ public final class RequestUtils {
 
 	public static <T> T toBean(Class<T> clazz, Map<String, Object> params)
 			throws Exception {
-		T obj = instantiate(clazz);
+		T obj = EntityUtils.instantiate(clazz);
 		initDefaultConvertor();
 		BeanUtils.populate(obj, params);
 		return obj;
@@ -79,7 +79,7 @@ public final class RequestUtils {
 
 	public static <T> T toBean(Class<T> clazz, Map<String, Object> params,
 			Map<Class<?>, Converter> convertors) throws Exception {
-		T obj = instantiate(clazz);
+		T obj = EntityUtils.instantiate(clazz);
 		initConvertor(convertors);
 		BeanUtils.populate(obj, params);
 		return obj;
@@ -87,7 +87,7 @@ public final class RequestUtils {
 
 	public static <T> T toBean(Class<T> clazz, Map<String, Object> params,
 			String datePattern) throws Exception {
-		T obj = instantiate(clazz);
+		T obj = EntityUtils.instantiate(clazz);
 		initDefaultConvertor();
 		ConvertUtils.register(new DateConvertor(datePattern), Date.class);
 		BeanUtils.populate(obj, params);
@@ -121,31 +121,4 @@ public final class RequestUtils {
 		}
 	}
 
-	public static <T> T instantiate(Class<T> clazz) throws Exception {
-		if (clazz.isInterface()) {
-			throw new Exception("Specified class is an interface");
-		}
-		try {
-			return clazz.newInstance();
-		} catch (Exception ex) {
-			throw new Exception("Is it an abstract class?", ex);
-		}
-	}
-
-	public static <T> T instantiateClass(Class<T> clazz) throws Exception {
-		if (clazz.isInterface()) {
-			throw new Exception("Specified class is an interface");
-		}
-		return instantiateClass(clazz.getDeclaredConstructor());
-	}
-
-	public static <T> T instantiateClass(Constructor<T> ctor, Object... args)
-			throws Exception {
-		try {
-			ctor.setAccessible(true);
-			return ctor.newInstance(args);
-		} catch (Exception ex) {
-			throw new Exception("Is it an abstract class?");
-		}
-	}
 }
