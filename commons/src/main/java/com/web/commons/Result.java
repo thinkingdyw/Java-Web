@@ -6,7 +6,7 @@ package com.web.commons;
  *
  * @param <T>
  */
-public class RequestResult<T> {
+public class Result<T> {
 
 	private int statusCode;
 	private String msg;
