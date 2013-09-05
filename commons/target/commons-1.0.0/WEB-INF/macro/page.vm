@@ -1,0 +1,54 @@
+#*
+  分页工具栏	版本：0.1
+	特性：带有	首页和尾页    上一页和下一页  按钮
+	@param page:分页类对象
+	@param baseUrl:查询地址
+	@param condition:查询条件，map格式
+	@param range:页码显示的范围
+*#
+#macro( pagin $page $baseUrl $condition $range)
+	##封装查询条件,将其拼接成一个查询字符串
+	#set($queryParam = '')
+	#foreach($c in $!condition.entrySet())
+		#if($c.value && $!c.value != '')
+			#if($c.key != 'targetPage')
+				#set($queryParam = $!$queryParam + "&$!c.key=$!c.value")
+			#end
+		#end
+	#end
+	##设定显示的页码范围
+	#set($start = ${page.currentPageNum} - $!range )
+	#set($end = ${page.currentPageNum} + $!range )
+
+	总页数$!{page.totalPageNumber}/每页$!{page.perPageNumber}条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href='$!baseUrl?targetPage=1$!queryParam'>首页</a>&nbsp;&nbsp;
+	#if(${start} < 1)
+		#set($start = 1 )
+	#end
+	#if(${end} > ${page.totalPageNumber})
+		#set($end = ${page.totalPageNumber} )
+	#end
+	#if(${page.currentPageNum}>1)
+		#set($prePage = ${page.currentPageNum} - 1)
+		<a href="$!baseUrl?targetPage=$!prePage$!queryParam">上一页</a>&nbsp;&nbsp;
+	#else
+		上一页&nbsp;&nbsp;
+	#end
+
+	#foreach($pageNum in [${start}..${end}] )
+		#if(${pageNum} == ${page.currentPageNum})
+			<font color="red">$!{pageNum}</font>&nbsp;&nbsp;
+		#else
+			<a href="$!baseUrl?targetPage=$!pageNum$!queryParam">$!{pageNum}</a>&nbsp;&nbsp;
+		#end
+	#end
+
+	#if(${page.currentPageNum} >= ${page.totalPageNumber})
+		下一页&nbsp;&nbsp;
+	#else
+		#set($nextPage = ${page.currentPageNum} + 1)
+		<a href="$!baseUrl?targetPage=$!nextPage$!queryParam">下一页</a>&nbsp;&nbsp;
+	#end
+	<a href="$!baseUrl?targetPage=$!page.totalPageNumber$!queryParam">尾页</a>
+	&nbsp;&nbsp;
+#end
