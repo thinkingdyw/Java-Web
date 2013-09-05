@@ -65,4 +65,19 @@ public class ApacheBeanUtilsTest {
 		
 		Assert.assertEquals(beanA.getEntityB().getEmail(),"diaoyouwei@jd.com");
 	}
+	@Test
+	public void intToEnum(){
+		Circle circle = toEnum(3);
+		System.out.println(circle);
+	}
+	private Circle toEnum(int enumOrignalValue) {
+		Circle[] cs = Circle.values();
+		
+		for (Circle circle : cs) {
+			if(circle.ordinal() == enumOrignalValue){
+				return circle;
+			}
+		}
+		throw new IllegalArgumentException("参数错误!");
+	}
 }

@@ -2,11 +2,10 @@ package com.web.springmvc.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.dto.EntityA;
 import com.dto.EntityADTO;
 import com.web.commons.Result;
 import com.web.commons.utils.HttpStatus;

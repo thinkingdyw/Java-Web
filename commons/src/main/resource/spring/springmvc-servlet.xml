@@ -98,14 +98,26 @@
 	<!-- type convert service -->
 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="registerDefaultFormatters" value="false" />
+        <!--
         <property name="converters">
         	<set>
         		<ref local="stringToDateConverter"/>
       		</set>
         </property>
+        -->
+        <property name="formatters">
+        	<set>
+        		<ref local="stringToDateFormatter"/>
+      		</set>
+        </property>
     </bean>
     <!-- custom date format converter -->
     <bean id="stringToDateConverter" class="com.web.springmvc.converter.StringToDateConverter">
+    	<!-- default:yyyy-MM-dd -->
+    	<property name="pattern" value="yyyy-MM-dd" />
+    </bean>
+    <!-- custom date format converter -->
+    <bean id="stringToDateFormatter" class="com.web.springmvc.formatter.StringToDateFormatter">
     	<!-- default:yyyy-MM-dd -->
     	<property name="pattern" value="yyyy-MM-dd HH:mm:ss" />
     </bean>
