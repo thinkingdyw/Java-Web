@@ -69,7 +69,7 @@
 			</props>
 		</property>
 	</bean>
-	<!-- Ajax + JSON -->
+	<!-- auto resolve view base on mediaType's contentType and view contentType   -->
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="order" value="1" />
 		<property name="defaultContentType" value="text/html;charset=utf-8" />

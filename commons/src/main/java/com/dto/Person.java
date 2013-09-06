@@ -8,7 +8,7 @@ public class Person {
 	private Long pid;
 	private String userName;
 	private String email;
-	private Integer sex;
+	private Sex sex;
 	private Date birthday;
 	private BigDecimal money;
 	public Long getPid() {
@@ -29,12 +29,6 @@ public class Person {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Integer getSex() {
-		return sex;
-	}
-	public void setSex(Integer sex) {
-		this.sex = sex;
-	}
 	public Date getBirthday() {
 		return birthday;
 	}
@@ -46,5 +40,15 @@ public class Person {
 	}
 	public void setMoney(BigDecimal money) {
 		this.money = money;
+	}
+	public Sex getSex() {
+		return sex;
+	}
+	public void setSex(Sex sex) {
+		this.sex = sex;
+	}
+
+	static enum Sex{
+		MALE,FEMAL;
 	}
 }
