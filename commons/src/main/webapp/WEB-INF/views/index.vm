@@ -3,6 +3,6 @@
 </hr>
 <form action="#springUrl('')/sync/type_convert"  method="post">
 	sex:<input type="radio" name="sex" value="0"/>男<input type="radio" name="sex" value="1"/>女<br/>
-	birthDate:<input name="date" value="$!date.format('yyyy-MM-dd',$!bean.createTime)"/>
+	birthDate:<input name="birthday" value="$!date.format('yyyy-MM-dd',$!bean.createTime)"/>
 	<input type="submit" />
 </form>

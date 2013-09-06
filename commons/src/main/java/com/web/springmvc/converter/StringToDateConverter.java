@@ -3,9 +3,8 @@ package com.web.springmvc.converter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.util.Set;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.springframework.core.convert.converter.Converter;
 
 /**
@@ -14,30 +13,44 @@ import org.springframework.core.convert.converter.Converter;
  *
  */
 public class StringToDateConverter implements Converter<String, Date>{
-	private Logger logger = Logger.getLogger(StringToDateConverter.class);
 	/**
 	 * 默认的日期格式
 	 */
 	private final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
-	private String pattern = DEFAULT_DATE_FORMAT;
+	private Set<String> patterns;
 	@Override
 	public Date convert(String source) {
 		//TODO 待优化，性能优化
-		SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
-		if(StringUtils.isNotBlank(source)){
+		SimpleDateFormat dateFormat = new SimpleDateFormat();
+		if(null != patterns && !patterns.isEmpty()){
+			for (String pattern : patterns) {
+				if(StringUtils.isNotBlank(source)){
+					try {
+						return dateFormat.parse(source);
+					} catch (ParseException ex) {
+					}
+				}
+				dateFormat.applyPattern(pattern);
+			}
+		}else{
+			dateFormat.applyPattern(DEFAULT_DATE_FORMAT);
 			try {
 				return dateFormat.parse(source);
-			} catch (ParseException e) {
-				logger.error("指定的日期格式错误:"+source);
-				return null;
+			} catch (ParseException ex) {
 			}
 		}
 		return null;
 	}
-	public String getPattern() {
-		return pattern;
+	public Set<String> getPatterns() {
+		return patterns;
 	}
-	public void setPattern(String pattern) {
-		this.pattern = pattern;
+	/**
+	 * 设置多种日期格式，最终选择合适的，否则返回null
+	 * @param patterns
+	 */
+	public void setPatterns(Set<String> patterns) {
+		this.patterns = patterns;
 	}
+	
+	
 }

@@ -126,7 +126,13 @@
     <!-- custom date format converter -->
     <bean id="stringToDateConverter" class="com.web.springmvc.converter.StringToDateConverter">
     	<!-- default:yyyy-MM-dd -->
-    	<property name="pattern" value="yyyy-MM-dd" />
+    	<property name="patterns">
+    		<set>
+    			<value>yyyy-MM-dd</value>
+    			<value>yyyy-MM-dd HH:mm:ss</value>
+    			<value>yyyy-MM</value>
+    		</set>
+    	</property>
     </bean>
     <!-- custom date formatter -->
     <bean id="stringToDateFormatter" class="com.web.springmvc.formatter.StringToDateFormatter">

@@ -30,7 +30,7 @@ public class SyncController {
 		result.setStatusCode(HttpStatus._2XX_200);
 		result.setData("This is Response data!!!");
 		result.setMsg("请求成功!");
-		logger.info(person.getSex());
+		logger.info(person.getBirthday());
 		return result;
 	}
 }
