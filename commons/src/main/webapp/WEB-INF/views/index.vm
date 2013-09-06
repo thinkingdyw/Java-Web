@@ -1,4 +1,4 @@
-#set($title="from index page")
+#set($title="this is vm index page")
 类型转换:
 </hr>
 <form action="#springUrl('')/sync/type_convert"  method="post">
