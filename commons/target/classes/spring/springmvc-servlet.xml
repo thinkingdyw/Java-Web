@@ -4,9 +4,9 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="
-        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	<!--
 		DispatcherServlet Context: defines this servlet's request-processing
 		infrastructure
@@ -107,6 +107,15 @@
 			</list>
 		</property>
 	</bean>
+	<!-- 异常处理 -->
+	<bean class="com.web.springmvc.exception.CustomMappingExceptionResolver">
+	   <property name="defaultErrorView" value="默认的错误视图页面"/>
+	   <property name="exceptionMappings">
+	       <props>
+               <prop key="自定义异常全类名">错误视图页面</prop>
+	        </props>
+	    </property>
+	</bean>
 	<!-- type convert service -->
 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="registerDefaultFormatters" value="false" />
@@ -139,5 +148,8 @@
     	<!-- default:yyyy-MM-dd -->
     	<property name="pattern" value="yyyy-MM-dd HH:mm:ss" />
     </bean>
+    
+    <!-- import related config file -->
+    <import resource="interceptor/*.xml"/>
 </beans>
 
