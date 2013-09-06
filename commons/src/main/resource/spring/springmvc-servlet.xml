@@ -150,7 +150,7 @@
 	   <property name="exceptionMappings">
 	       <props>
                <prop key="自定义异常全类名">错误视图页面</prop>
-	        </props>
+	       </props>
 	    </property>
 	</bean>
     <!-- import related config file -->
