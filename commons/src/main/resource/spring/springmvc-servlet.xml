@@ -107,14 +107,10 @@
 			</list>
 		</property>
 	</bean>
-	<!-- 异常处理 -->
-	<bean class="com.web.springmvc.exception.CustomMappingExceptionResolver">
-	   <property name="defaultErrorView" value="默认的错误视图页面"/>
-	   <property name="exceptionMappings">
-	       <props>
-               <prop key="自定义异常全类名">错误视图页面</prop>
-	        </props>
-	    </property>
+	<!-- file upload related -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="maxUploadSize" value="20971520" />
 	</bean>
 	<!-- type convert service -->
 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
@@ -148,8 +144,17 @@
     	<!-- default:yyyy-MM-dd -->
     	<property name="pattern" value="yyyy-MM-dd HH:mm:ss" />
     </bean>
-    
+    <!-- 异常处理 -->
+	<bean class="com.web.springmvc.exception.CustomMappingExceptionResolver">
+	   <property name="defaultErrorView" value="默认的错误视图页面"/>
+	   <property name="exceptionMappings">
+	       <props>
+               <prop key="自定义异常全类名">错误视图页面</prop>
+	        </props>
+	    </property>
+	</bean>
     <!-- import related config file -->
     <import resource="interceptor/*.xml"/>
+    
 </beans>
 
