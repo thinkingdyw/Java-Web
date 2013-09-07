@@ -146,12 +146,12 @@
     </bean>
     <!-- 异常处理 -->
 	<bean class="com.web.springmvc.exception.CustomMappingExceptionResolver">
-	   <property name="defaultErrorView" value="默认的错误视图页面"/>
-	   <property name="exceptionMappings">
-	       <props>
-               <prop key="自定义异常全类名">错误视图页面</prop>
-	        </props>
-	    </property>
+		<property name="defaultErrorView" value="默认的错误视图页面"/>
+		<property name="exceptionMappings">
+			<props>
+				<prop key="自定义异常全类名">错误视图页面</prop>
+			</props>
+		</property>
 	</bean>
     <!-- import related config file -->
     <import resource="interceptor/*.xml"/>
