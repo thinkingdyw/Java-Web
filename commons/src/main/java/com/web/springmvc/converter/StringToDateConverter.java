@@ -5,14 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.core.convert.converter.Converter;
 
 /**
- * 实现全局：字符串到日期类型的转换
+ * 实现全局：字符串到日期类型的转换,同时支持多种格式转换
  * @author diaoyouwei
  *
  */
 public class StringToDateConverter implements Converter<String, Date>{
+	private Logger log = Logger.getLogger(getClass());
 	/**
 	 * 默认的日期格式
 	 */
@@ -39,6 +41,7 @@ public class StringToDateConverter implements Converter<String, Date>{
 			} catch (ParseException ex) {
 			}
 		}
+		log.info(source+":日期格式错误!不能实现转换,返回null");
 		return null;
 	}
 	public Set<String> getPatterns() {
@@ -51,6 +54,4 @@ public class StringToDateConverter implements Converter<String, Date>{
 	public void setPatterns(Set<String> patterns) {
 		this.patterns = patterns;
 	}
-	
-	
 }

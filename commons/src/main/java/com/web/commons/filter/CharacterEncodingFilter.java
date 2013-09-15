@@ -95,7 +95,7 @@ public class CharacterEncodingFilter implements Filter {
 		}
 
 		private boolean isEmpty(String name) {
-			if (null == name || name.length() == 0) {
+			if (isNull(name) || name.trim().length() == 0) {
 				return true;
 			} else {
 				return false;
@@ -111,7 +111,9 @@ public class CharacterEncodingFilter implements Filter {
 			}
 
 		}
-
+		private boolean isNull(Object obj){
+			return null == obj;
+		}
 		private String getEncodedValue(String value) {
 			if (!isEmpty(value)) {
 				String newValue = null;
