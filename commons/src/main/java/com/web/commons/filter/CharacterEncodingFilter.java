@@ -21,7 +21,7 @@ public class CharacterEncodingFilter implements Filter {
 	/**
 	 * default character set
 	 */
-	private String encoding = "utf-8";
+	private String encoding = "UTF-8";
 
 	@Override
 	public void destroy() {
@@ -46,8 +46,8 @@ public class CharacterEncodingFilter implements Filter {
 
 	private class EncodingHttpServletRequest extends HttpServletRequestWrapper {
 
-		private String encoding = "utf-8";
-		private final String GET = "get";
+		private String encoding = "UTF-8";
+		private final String GET = "GET";
 		private HttpServletRequest request;
 
 		public EncodingHttpServletRequest(HttpServletRequest request,

@@ -1,5 +1,7 @@
 package com.web.springmvc.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +33,15 @@ public class SyncController {
 		result.setData("This is Response data!!!");
 		result.setMsg("请求成功!");
 		logger.info(person.getBirthday());
+		return result;
+	}
+	@RequestMapping("/server_encode")
+	@ResponseBody
+	public Result<String> demo2_testServerCharset(HttpServletRequest request){
+		Result<String> result = new Result<String>();
+		String encoder = request.getCharacterEncoding();
+		result.setMsg("服务器默认编码格式："+encoder);
+		logger.info(encoder);
 		return result;
 	}
 }

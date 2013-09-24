@@ -38,9 +38,7 @@ public final class RequestUtils {
 	 **/
 	public static void asyncWrite(HttpServletResponse response,String content) throws IOException{
 		response.setContentType("text/html;charset=utf-8");
-		
 		response.getWriter().print(content);
-		
 	}
 	public static <T> T toBean(Class<T> clazz, HttpServletRequest request)
 			throws Exception {
