@@ -21,10 +21,9 @@ public class CharacterUtils {
 		}
 		final int len = str.length();
 		for (int i = 0; i < len; i++) {
-        	char c = str.charAt(i);
-            if (!isSBC(c)) {
-            }else{
-                return true;
+			char c = str.charAt(i);
+			if (isSBC(c)) {
+				return true;
             }
         }
 		return false;
@@ -62,5 +61,9 @@ public class CharacterUtils {
 			return false;
         }
 		return true;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(containSBC("sa"));
 	}
 }
