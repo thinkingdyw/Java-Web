@@ -13,7 +13,6 @@ public class CharacterUtils {
 
 	/**
 	 * 是否包含全角字符，不包括汉字
-	 * 
 	 * @param str
 	 * @return
 	 */
