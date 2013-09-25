@@ -15,7 +15,7 @@ public class Result<T> {
 	private T data;
 	/**
 	 * 自定义扩展属性
-	 * /
+	 */
 	private String attr1;
 	public int getStatusCode() {
 		return statusCode;
