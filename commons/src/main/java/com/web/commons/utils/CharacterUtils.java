@@ -66,8 +66,4 @@ public class CharacterUtils {
 		}
 		return true;
 	}
-
-	public static void main(String[] args) {
-		System.out.println(containSBC("sa"));
-	}
 }
