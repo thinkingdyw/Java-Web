@@ -149,7 +149,6 @@ public interface HttpStatus {
 	 *	  	如果这不是一个GET或者HEAD请求，那么浏览器禁止自动进行重定向，除非得到用户的确认，因为请求的条件可能因此发生变化。
 	 */
 	public static int _3XX_307 = 307;
-	//TODO
 	/**
 	 * Bad Request:
 	 * 		由于包含语法错误，当前请求无法被服务器理解。除非进行修改，否则客户端不应该重复提交这个请求。
