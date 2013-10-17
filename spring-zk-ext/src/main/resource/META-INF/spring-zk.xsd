@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://www.think.com/schema/zk"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	targetNamespace="http://www.think.com/schema/zk"
+	elementFormDefault="qualified"   
+    attributeFormDefault="unqualified">
+	
+	<xsd:import namespace="http://www.springframework.org/schema/beans"/>
+	
+	<xsd:annotation>
+		<xsd:documentation><![CDATA[ 文档注释：测试Spring集成Zookeeper ]]></xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="zkConfig">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Zookeeper 配置 ]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="beans:identifiedType">
+					<xsd:attribute name="host" type="xsd:string" use="required">
+						<xsd:annotation>
+							<xsd:documentation>
+								<![CDATA[ 逗号分隔的zookeeper集群配置，例如：192.168.23.11::2181,192.168.23.12::2181,192.168.23.13::2181 ]]>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="time-out" type="xsd:integer" use="optional"
+						default="5000">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[ 超时时间：默认值：5000毫秒. ]]></xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
