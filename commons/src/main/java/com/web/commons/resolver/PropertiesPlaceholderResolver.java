@@ -23,10 +23,10 @@ public class PropertiesPlaceholderResolver implements PlaceholderResolver {
 	private Properties config;
 	private Set<String> visitedPlaceholders = new HashSet<String>();// 存放已访问的占位符，用于判断是否循环调用
 
-	public Map<String, String> resolve(List<Properties> props) {
+	public Map<String, String> resolve(List<Properties> properties) {
 		Map<String, String> configure = new HashMap<String, String>();
-		for (Properties properties : props) {
-			configure.putAll(readConfigure(properties));
+		for (Properties propertie : properties) {
+			configure.putAll(readConfigure(propertie));
 		}
 		this.parse(configure);
 		return configure;
@@ -77,8 +77,6 @@ public class PropertiesPlaceholderResolver implements PlaceholderResolver {
 				throw new RuntimeException("Circular placeholder reference '"
 						+ placeHolder + "' in property definitions");
 			}
-			;
-
 			String placeHolderReplace = config.get(placeHolderName) == null ? ""
 					: config.get(placeHolderName);
 			value = value.replace(placeHolder, placeHolderReplace);
@@ -126,5 +124,12 @@ public class PropertiesPlaceholderResolver implements PlaceholderResolver {
 
 	public void setConfig(Properties config) {
 		this.config = config;
+	}
+	@Override
+	public Map<String, String> resolve(Properties propertie) {
+		Map<String, String> configure = new HashMap<String, String>();
+		configure.putAll(readConfigure(propertie));
+		this.parse(configure);
+		return configure;
 	}
 }

@@ -10,8 +10,14 @@ import java.util.Properties;
 public interface PlaceholderResolver {
   /**
    * 解析配置信息
-   * @param config
+   * @param properties
    * @return
    */
-  public Map<String, String> resolve(List<Properties> props);
+  public Map<String, String> resolve(List<Properties> properties);
+  /**
+   * 解析配置信息
+   * @param propertie
+   * @return
+   */
+  public Map<String, String> resolve(Properties props);
 } 
