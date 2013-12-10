@@ -35,4 +35,11 @@ public class Result<T> {
 	public void setData(T data) {
 		this.data = data;
 	}
+	public String getAttr1() {
+		return attr1;
+	}
+	public void setAttr1(String attr1) {
+		this.attr1 = attr1;
+	}
+	
 }
