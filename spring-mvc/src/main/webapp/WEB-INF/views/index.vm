@@ -1,0 +1,8 @@
+#set($title="this is vm index page")
+类型转换:
+</hr>
+<form action="#springUrl('')/sync/type_convert"  method="post">
+	$text.input.text.sex:<input type="radio" name="sex" value="0"/>男<input type="radio" name="sex" value="1"/>女<br/>
+	birthDate:<input name="birthday" value="$!date.format('yyyy-MM-dd',$!bean.createTime)"/>
+	<input type="submit" />
+</form>
