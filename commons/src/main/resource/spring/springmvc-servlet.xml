@@ -74,6 +74,7 @@
 		<property name="layoutUrl" value="${velocity.layout.url}" />
 		<property name="layoutKey" value="${velocity.layout.key}" />
 		<property name="screenContentKey" value="${velocity.layout.screen.content.key}" />
+		<!--custom configuration-->
 		<property name="attributes">
 			<props>
 				<prop key="ver">0.0.1</prop>
