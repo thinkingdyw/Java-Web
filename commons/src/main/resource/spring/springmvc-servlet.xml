@@ -139,26 +139,6 @@
     			<value>yyyy-MM</value>
     		</set>
     	</property>
-    </bean>
-    <!-- custom date formatter -->
-    <bean id="stringToDateFormatter" class="com.web.springmvc.formatter.StringToDateFormatter">
-    	<!-- default:yyyy-MM-dd -->
-    	<property name="pattern" value="yyyy-MM-dd HH:mm:ss" />
-    </bean>
-    <!-- 异常处理 -->
-	<bean class="com.web.springmvc.exception.CustomMappingExceptionResolver">
-		<!-- 默认的错误视图页面 -->
-		<property name="defaultErrorView" value="errors/default.vm"/>
-		<!-- 自定义异常处理页面映射-->
-		<property name="exceptionMappings">
-			<props>
-				<!-- key:异常全类名,value:对应的错误页面-->
-				<prop key="java.lang.Exception">errors/default</prop>
-			</props>
-		</property>
-	</bean>
-    <!-- import related config file -->
-    <import resource="interceptor/*.xml"/>
-    
+    </bean>    
 </beans>
 

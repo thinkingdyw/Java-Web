@@ -14,6 +14,6 @@
 			<ref local="_loginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-	<bean id="_loginInterceptor" class="com.web.springmvc.interceptor.LoginInterceptorHandler"></bean>
+	<bean id="_loginInterceptor" class="com.springmvc.interceptor.LoginInterceptorHandler"></bean>
 </beans>
 

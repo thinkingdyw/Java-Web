@@ -16,7 +16,7 @@
 		configure as beans
 	-->
 	<!-- @Controller, and other @Component, etc. -->
-	<context:component-scan base-package="com.web" />
+	<context:component-scan base-package="com" />
 
 	<context:property-placeholder
 		location="classpath:conf/spring-velocity.properties" />
@@ -130,7 +130,7 @@
         -->
     </bean>
     <!-- custom date format converter -->
-    <bean id="stringToDateConverter" class="com.web.springmvc.converter.StringToDateConverter">
+    <bean id="stringToDateConverter" class="com.springmvc.converter.StringToDateConverter">
     	<!-- default:yyyy-MM-dd -->
     	<property name="patterns">
     		<set>
@@ -141,12 +141,12 @@
     	</property>
     </bean>
     <!-- custom date formatter -->
-    <bean id="stringToDateFormatter" class="com.web.springmvc.formatter.StringToDateFormatter">
+    <bean id="stringToDateFormatter" class="com.springmvc.formatter.StringToDateFormatter">
     	<!-- default:yyyy-MM-dd -->
     	<property name="pattern" value="yyyy-MM-dd HH:mm:ss" />
     </bean>
     <!-- 异常处理 -->
-	<bean class="com.web.springmvc.exception.CustomMappingExceptionResolver">
+	<bean class="com.springmvc.exception.CustomMappingExceptionResolver">
 		<!-- 默认的错误视图页面 -->
 		<property name="defaultErrorView" value="errors/default.vm"/>
 		<!-- 自定义异常处理页面映射-->

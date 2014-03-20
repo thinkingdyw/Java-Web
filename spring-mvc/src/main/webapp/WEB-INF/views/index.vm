@@ -1,8 +1,40 @@
 #set($title="this is vm index page")
+#*
 类型转换:
 </hr>
+
 <form action="#springUrl('')/sync/type_convert"  method="post">
 	$text.input.text.sex:<input type="radio" name="sex" value="0"/>男<input type="radio" name="sex" value="1"/>女<br/>
 	birthDate:<input name="birthday" value="$!date.format('yyyy-MM-dd',$!bean.createTime)"/>
 	<input type="submit" />
 </form>
+*#
+<script type="text/javascript">
+	$(function(){
+		$('#wf').append("<line x1='1' y1='1' x2='20' y2='100' style='stroke:rgb(99,99,99);stroke-width:1.5'/>");
+		$('#wf').mousedown(function(e){
+    		var x1 = e.originalEvent.x || e.originalEvent.layerX || 0;
+    		var y1 = e.originalEvent.y || e.originalEvent.layerY || 0; 
+    		$('#dline').attr({
+				x1:x1,
+    			y1:y1,
+				x2:x1,
+    			y2:y1,
+    		});
+    		$('#wf').mousemove(function(e){
+        		var x2 = e.originalEvent.x || e.originalEvent.layerX || 0;
+        		var y2 = e.originalEvent.y || e.originalEvent.layerY || 0; 
+        		$('#dline').attr({
+        			x2:x2-8,
+        			y2:y2-8
+        		})
+        	});
+    		$('#wf').mouseup(function(e){
+        		$('#wf').unbind('mousemove');
+        	});
+    	});
+	});
+</script>
+<svg id="wf" width="100%" height="100%" version="1.1"xmlns="http://www.w3.org/2000/svg">
+	<line id="dline" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(99,99,99);stroke-width:1.5"/>
+</svg>
