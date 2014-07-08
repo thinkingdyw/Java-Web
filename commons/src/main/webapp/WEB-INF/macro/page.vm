@@ -52,3 +52,57 @@
 	<a href="$!baseUrl?targetPage=$!page.totalPageNumber$!queryParam">尾页</a>
 	&nbsp;&nbsp;
 #end
+#*
+  bootstrap 分页工具栏	版本：0.1
+	特性：带有	首页和尾页    上一页和下一页  按钮
+	@param page:分页类对象
+	@param baseUrl:查询地址
+	@param condition:查询条件，map格式
+	@param range:页码显示的范围
+*#
+#macro( bootpagin $page $baseUrl $condition $range)
+	##封装查询条件,将其拼接成一个查询字符串
+	#set($queryParam = '')
+	#foreach($c in $!condition.entrySet())
+		#if($c.value && $!c.value != '')
+			#if($c.key != 'targetPage')
+				#set($queryParam = $!$queryParam + "&$!c.key=$!c.value")
+			#end
+		#end
+	#end
+	##设定显示的页码范围
+	#set($start = ${page.currentPageNum} - $!range )
+	#set($end = ${page.currentPageNum} + $!range )
+	<ul class="pagination no-margin pull-left">
+    	#if(${start} < 1)
+    		#set($start = 1 )
+    	#end
+    	#if(${end} > ${page.totalPageNumber})
+    		#set($end = ${page.totalPageNumber} )
+		#end
+    	#if(${page.currentPageNum}>1)
+    		#set($prePage = ${page.currentPageNum} - 1)
+			<li><a href="$!baseUrl?targetPage=1$!queryParam">&lt;&lt;</a></li>
+    		<li><a href="$!baseUrl?targetPage=$!prePage$!queryParam">&lt;</a></li>
+    	#else
+			<li class="disabled"><a>&lt;&lt;</a></li>
+    		<li class="disabled"><a>&lt;</a></li>
+		#end
+		
+    	#foreach($pageNum in [${start}..${end}] )
+			<li #if(${pageNum} == ${page.currentPageNum}) class="active" #end>
+					<a href="$!baseUrl?targetPage=$!pageNum$!queryParam">$!{pageNum}</a>
+			</li>
+		#end
+		
+    	#if(${page.currentPageNum} >= ${page.totalPageNumber})
+			<li class="disabled"><a>&gt;</a></li>
+			<li class="disabled"><a>&gt;&gt;</a></li>
+    	#else
+    		#set($nextPage = ${page.currentPageNum} + 1)
+    		<li><a href="$!baseUrl?targetPage=$!nextPage$!queryParam">&gt;</a></li>
+    		<li><a href="$!baseUrl?targetPage=$!page.totalPageNumber$!queryParam">&gt;&gt;</a></li>
+		#end
+		<li  class="disabled"><a>共：$!page.totalLine条数据</a></li>
+	</ul>
+#end
