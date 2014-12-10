@@ -46,8 +46,4 @@ public class DataDictionaryConfiguration {
 	public String getRoot() {
 		return root;
 	}
-	
-	public static void main(String[] args) {
-		System.out.println("000000727954".length());
-	}
 }
