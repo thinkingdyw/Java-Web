@@ -157,7 +157,7 @@
 			</props>
 		</property>
     </bean>
-    <!-- 数据字典解析器置 -->
+    <!-- 数据字典解析器配置 -->
     <bean id="enumDicResolver" class="com.common.dictionary.EnumDictionaryResolver" scope="singleton">
     </bean>
     <!-- 数据字典配置 -->
