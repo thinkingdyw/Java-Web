@@ -146,7 +146,7 @@
     	<property name="pattern" value="yyyy-MM-dd HH:mm:ss" />
     </bean>
     <!-- 异常处理 -->
-	<bean class="com.springmvc.exception.CustomMappingExceptionResolver">
+    <bean class="com.springmvc.exception.CustomMappingExceptionResolver">
 		<!-- 默认的错误视图页面 -->
 		<property name="defaultErrorView" value="errors/default.vm"/>
 		<!-- 自定义异常处理页面映射-->
@@ -156,7 +156,15 @@
 				<prop key="java.lang.Exception">errors/default</prop>
 			</props>
 		</property>
-	</bean>
+    </bean>
+    <!-- 数据字典解析器置 -->
+    <bean id="enumDicResolver" class="com.common.dictionary.EnumDictionaryResolver" scope="singleton">
+    </bean>
+    <!-- 数据字典配置 -->
+    <bean id="dic" class="com.common.dictionary.DataDictionaryConfiguration" scope="singleton" init-method="init">
+		<property name="resolver" ref="enumDicResolver"/>
+		<property name="root" value="dic"/>
+    </bean>
     <!-- import related config file -->
     <import resource="interceptor/*.xml"/>
     
