@@ -1,0 +1,2 @@
+hibernate-validator: Hibernate验证框架
+  |-------http://docs.jboss.org/hibernate/validator/4.2/reference/zh-CN/html_single/
