@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	
+	<context:component-scan base-package="com.orgname.projectname "/>
+	<aop:aspectj-autoproxy expose-proxy="true"/>
+
+	<context:annotation-config/>
+
+  	<context:property-placeholder location="classpath:conf/*.properties" system-properties-mode="FALLBACK"/>
+	<!-- 数据字典解析器配置 -->
+    <bean id="enumDicResolver" class="com.orgname.projectname.core.dictionary.EnumDictionaryResolver" scope="singleton">
+    	<property name="file" value="spring/dictionary.properties"></property>
+    </bean>
+    <!-- 数据字典配置 -->
+    <bean id="dic" class="com.orgname.projectname.core.dictionary.DataDictionaryConfiguration" scope="singleton" init-method="init">
+		<property name="resolver" ref="enumDicResolver"/>
+		<property name="root" value="dic"/>
+    </bean>
+    <!-- integrate mybatis -->
+    <import resource="spring-mybatis.xml"/>
+</beans>

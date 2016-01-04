@@ -1,14 +1,5 @@
 #set($title="this is vm index page")
-#*
-类型转换:
-</hr>
-
-<form action="#springUrl('')/sync/type_convert"  method="post">
-	$text.input.text.sex:<input type="radio" name="sex" value="0"/>男<input type="radio" name="sex" value="1"/>女<br/>
-	birthDate:<input name="birthday" value="$!date.format('yyyy-MM-dd',$!bean.createTime)"/>
-	<input type="submit" />
-</form>
-*#
+开始画线吧：
 <script type="text/javascript">
 	$(function(){
 		$('#wf').append("<line x1='1' y1='1' x2='20' y2='100' style='stroke:rgb(99,99,99);stroke-width:1.5'/>");
