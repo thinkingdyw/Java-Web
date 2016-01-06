@@ -157,6 +157,7 @@
 			</props>
 		</property>
     </bean>
+    
     <!-- import related config file -->
     <import resource="interceptor/*.xml"/>
     

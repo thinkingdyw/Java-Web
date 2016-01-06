@@ -13,8 +13,7 @@ public final class WebRequestUtils {
 	/**
 	 * 是否Ajax异步请求
 	 **/
-	@SuppressWarnings("unused")
-	private static boolean isAsyncRequest(HttpServletRequest request){
+	public static boolean isAsyncRequest(HttpServletRequest request){
 		final String ajaxRequest = request.getHeader(AJAX_REQUEST_HEADER);
 		if(null != ajaxRequest && AJAX_REQUEST.equals(ajaxRequest)){
 			return true;
