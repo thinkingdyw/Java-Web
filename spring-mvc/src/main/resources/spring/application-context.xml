@@ -3,19 +3,32 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:cache="http://www.springframework.org/schema/cache"
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
-	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 	
-	<context:component-scan base-package="com.orgname.projectname "/>
+	<context:component-scan base-package="com.orgname.projectname"/>
 	<aop:aspectj-autoproxy expose-proxy="true"/>
-
+	
 	<context:annotation-config/>
 
   	<context:property-placeholder location="classpath:conf/*.properties" system-properties-mode="FALLBACK"/>
+	
+	<cache:annotation-driven />
+	<!-- generic cache manager -->
+	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+	    <property name="caches">
+		    <set>
+		        <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" name="default"/>
+		    </set>
+	    </property>
+	</bean>
+	
 	<!-- 数据字典解析器配置 -->
     <bean id="enumDicResolver" class="com.orgname.projectname.core.dictionary.EnumDictionaryResolver" scope="singleton">
     	<property name="file" value="spring/dictionary.properties"></property>

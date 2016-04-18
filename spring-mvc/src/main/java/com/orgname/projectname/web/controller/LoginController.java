@@ -14,7 +14,7 @@ public class LoginController extends DefaultController{
      * 跳转到首页
      * @return 首页
      */
-    @RequestMapping(value={"/","/index.html","/index.htm"})
+    @RequestMapping(value={"","/","/index.html","/index.htm"})
     public ModelAndView index(){
         ModelAndView index = new ModelAndView("views/index");
         return index;

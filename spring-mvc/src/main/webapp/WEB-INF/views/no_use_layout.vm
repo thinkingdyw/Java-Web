@@ -1,0 +1,5 @@
+#set($layout="layout/no_layout.vm")
+
+<script type="text/javascript" src="#springUrl('/dic')"></script>
+
+this page not use layout template!

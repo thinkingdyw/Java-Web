@@ -7,8 +7,8 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	
 	<mvc:interceptors>
-		<!-- 协议审核操作 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<!-- login and logout not filter -->
@@ -16,8 +16,34 @@
 			<mvc:exclude-mapping path="/logout"/>
 			<!-- static resource not filter -->
 			<mvc:exclude-mapping path="/static/**"/>
-			<ref local="_loginInterceptor" />
+			<!-- dictionary not filter -->
+			<mvc:exclude-mapping path="/dic"/>
+			<bean class="com.orgname.projectname.web.common.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-	<bean id="_loginInterceptor" class="com.orgname.projectname.web.common.interceptor.LoginInterceptor"></bean>
+
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 添加需要生成token的资源地址 -->
+			<mvc:mapping path="/**" />
+			<!-- login and logout not filter -->
+			<mvc:exclude-mapping path="/login"/>
+			<mvc:exclude-mapping path="/logout"/>
+			<!-- static resource not filter -->
+			<mvc:exclude-mapping path="/static/**"/>
+			<!-- dictionary not filter -->
+			<mvc:exclude-mapping path="/dic"/>
+			<bean class="com.orgname.projectname.web.common.interceptor.AvoidDuplicateSubmissionTokenGernerator" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 验证是否重复提交 -->
+			<mvc:mapping path="/sync/avoidDuplicateSubmission" />
+			<bean class="com.orgname.projectname.web.common.interceptor.AvoidDuplicateSubmissionValidator" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 </beans>

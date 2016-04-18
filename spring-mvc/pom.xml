@@ -187,10 +187,16 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-		<dependency>  
-			<groupId>org.hibernate</groupId>  
-		    <artifactId>hibernate-validator</artifactId>  
-		    <version>5.0.2.Final</version>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.0.2.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>3.4</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
